@@ -25,6 +25,10 @@
   margin-bottom: 12px;
 }
 
+.tt-select {
+  cursor: pointer;
+}
+
 .tt-field {
   display: flex;
   flex-direction: column;
@@ -130,10 +134,13 @@
 .tt-modal__close {
   position: absolute;
   top: 8px;
-  right: 8px;
+  right: 4px;
   border: 0;
   background: transparent;
   font-size: 20px;
+  color: #dc3545;
+  height: 20px;
+  line-height: 0;
 }
 
 .footer__text {
