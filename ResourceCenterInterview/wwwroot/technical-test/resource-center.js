@@ -1,6 +1,8 @@
 (function ($) {
   "use strict";
 
+  var storageKey = "resourceCenterFilters";
+
   var state = {
     resources: Array.isArray(window.resourceCenterData)
       ? window.resourceCenterData
@@ -147,11 +149,14 @@
       $(this).val(value);
       state.searchText = value;
 
+      saveFilters();
       render();
     });
 
     $(selectors.category).on("change", function () {
       state.category = $(this).val();
+
+      saveFilters();
       render();
     });
 
@@ -163,6 +168,8 @@
       state.category = "all";
       $(selectors.search).val("");
       $(selectors.category).val("all");
+
+      saveFilters();
       render();
     });
 
@@ -181,8 +188,39 @@
     });
   }
 
+  function saveFilters() {
+    sessionStorage.setItem(
+      storageKey,
+      JSON.stringify({
+        searchText: state.searchText,
+        category: state.category,
+      }),
+    );
+  }
+
+  function loadFilters() {
+    try {
+      var saved = JSON.parse(sessionStorage.getItem(storageKey));
+
+      if (!saved) {
+        return;
+      }
+
+      state.searchText = saved.searchText || "";
+      state.category = saved.category || "all";
+    } catch (error) {
+      state.searchText = "";
+      state.category = "all";
+    }
+  }
+
   function init() {
     loadCategories();
+    loadFilters();
+
+    $(selectors.search).val(state.searchText);
+    $(selectors.category).val(state.category);
+
     wireEvents();
     render();
   }
