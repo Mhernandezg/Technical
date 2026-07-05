@@ -75,5 +75,19 @@
     "summary": "Checklist rapido para evitar errores frecuentes en entrevistas.",
     "category": "Pruebas",
     "url": ""
+  },
+  {
+    "id": 112,
+    "title": null,
+    "summary": null,
+    "category": null,
+    "url": null
+  },
+  {
+    "id": 113,
+    "title": "Guia de publicacion de ofertas para perfiles IT",
+    "summary": "Checklist rapido para evitar errores frecuentes en publicaciones nuevas.",
+    "category": null,
+    "url": "https://example.test/resource/101"
   }
 ]
