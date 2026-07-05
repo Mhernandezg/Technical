@@ -136,4 +136,27 @@
   font-size: 20px;
 }
 
+.footer__text {
+  display: inline-block;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .tt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .tt-resource-center {
+    padding: 16px;
+  }
+  .tt-filters,
+  .tt-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /*# sourceMappingURL=resource-center.css.map */
