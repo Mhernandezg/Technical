@@ -35,6 +35,28 @@
       .replace(/'/g, "&#039;");
   }
 
+  //Sanetizar input para evitar inyeccion de codigo
+  function sanitizeInput(value) {
+    return String(value || "")
+      .replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g, "")
+      .replace(/\s{2,}/g, " ");
+  }
+
+  // Cargar categorias unicas desde los recursos de estado y agregarlas al select de categorias de forma dinamica
+  function loadCategories() {
+    var categories = [
+      ...new Set(state.resources.map((item) => item.category).filter(Boolean)),
+    ];
+
+    var html = '<option value="all">Todas</option>';
+
+    categories.forEach(function (category) {
+      html += `<option value="${category}">${category}</option>`;
+    });
+
+    $(selectors.category).html(html);
+  }
+
   function filteredResources() {
     var text = normalize(state.searchText);
     var category = normalize(state.category);
@@ -90,7 +112,7 @@
     var data = filteredResources();
     var html = data.map(cardHtml).join("");
     $(selectors.grid).html(html);
-    $(selectors.total).text(state.resources.length);
+    $(selectors.total).text(data.length);
     $(selectors.empty).prop("hidden", data.length > 0);
   }
 
@@ -105,7 +127,9 @@
 
     $(selectors.modalTitle).text(found.title || "Sin titulo");
     $(selectors.modalSummary).text(found.summary || "Sin resumen");
-    $(selectors.modalLink).attr("href", found.url || "#");
+    $(selectors.modalLink)
+      .attr("href", found.url || "#")
+      .toggle(Boolean(found.url));
 
     $(selectors.modal).prop("hidden", false).attr("aria-hidden", "false");
   }
@@ -116,7 +140,11 @@
 
   function wireEvents() {
     $(selectors.search).on("input", function () {
-      state.searchText = $(this).val();
+      var value = sanitizeInput($(this).val());
+
+      $(this).val(value);
+      state.searchText = value;
+
       render();
     });
 
@@ -144,9 +172,15 @@
 
     // TODO CANDIDATO 3:
     // Cerrar modal con tecla Escape.
+    $(document).on("keydown", function (event) {
+      if (event.key === "Escape" && !$(selectors.modal).prop("hidden")) {
+        closeModal();
+      }
+    });
   }
 
   function init() {
+    loadCategories();
     wireEvents();
     render();
   }
