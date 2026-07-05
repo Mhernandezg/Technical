@@ -54,5 +54,26 @@
     "summary": "Sesion de 15 minutos con recomendaciones de evaluacion.",
     "category": "Videos",
     "url": "https://example.test/resource/108"
+  },
+  {
+    "id": 109,
+    "title": "Video de refactorizacion de codigo",
+    "summary": "Sesion de 30 minutos con recomendaciones de refactorizacion.",
+    "category": "Codigo",
+    "url": "https://example.test/resource/109"
+  },
+  {
+    "id": 110,
+    "title": null,
+    "summary": null,
+    "category": "Pruebas",
+    "url": null
+  },
+  {
+    "id": 111,
+    "title": "",
+    "summary": "Checklist rapido para evitar errores frecuentes en entrevistas.",
+    "category": "Pruebas",
+    "url": ""
   }
 ]
