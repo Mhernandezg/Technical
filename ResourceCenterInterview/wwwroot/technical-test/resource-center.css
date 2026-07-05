@@ -1,5 +1,5 @@
 body {
-  background: #DAE1F7;
+  background: #dae1f7;
 }
 
 .navbar,
@@ -76,6 +76,12 @@ footer {
   border-radius: 8px;
   padding: 12px;
   background: #a3b8f7;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tt-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .tt-card__category {
@@ -133,7 +139,7 @@ footer {
   position: relative;
   width: min(560px, 100vw - 40px);
   margin: 90px auto 0;
-  background: #DAE1F7;
+  background: #dae1f7;
   border-radius: 10px;
   padding: 18px;
   z-index: 1;
